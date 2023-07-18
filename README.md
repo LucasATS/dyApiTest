@@ -21,7 +21,7 @@
 - [X] Sistema para ler link, salvar link
 - [X] Formatador de texto para json
 - [X] Alertas mais elegantes
-- [ ] Melhorar arquiterura para ficar mais legivel
+- [ ] Melhorar arquitetura para ficar mais legivel
 - [ ] Reconstruir lógica para o header
 - [ ] Permitir enviar arquivos
 - [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
