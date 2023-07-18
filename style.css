@@ -1,0 +1,158 @@
+:root {
+    --bg-color: #fafafa;
+
+    --font-color1: #343434;
+
+    --border-input: #f2b84b68;
+
+    --bg-button-color1: #F2B84B;
+    --bg-button-color1-click: #F2E750;
+}
+
+html,
+body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: normal;
+    font-feature-settings: normal;
+    font-family: Söhne, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-variation-settings: normal;
+    line-height: 1.5;
+    tab-size: 4;
+
+    background-color: var(--bg-color);
+
+    font-size: 14px;
+}
+
+input[type=text] {
+    padding: 0;
+    height: 26px !important;
+    text-transform: none !important;
+}
+
+textarea {
+    width: 446px !important;
+    min-height: 150px !important;
+    max-height: 350px !important;
+    text-transform: none !important;
+}
+
+select,
+input[type=text],
+textarea {
+    border: 2px var(--border-input) solid;
+}
+
+.botao,
+select,
+input[type=text],
+textarea {
+    width: 220px;
+    height: 30px;
+
+    font-weight: 700;
+    text-transform: uppercase;
+
+    outline: none;
+    border-radius: 6px;
+}
+
+.botao {
+    border: 2px transparent solid;
+    background-color: var(--bg-button-color1);
+}
+
+.botao:hover {
+    background-color: var(--bg-button-color1);
+}
+
+.botao:hover,
+select:hover,
+input[type=text]:hover,
+textarea:hover {
+    border: 2px #343434 solid;
+    cursor: pointer;
+}
+
+.status_ok,
+.status_warning,
+.status_error {
+    font-weight: 600;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    padding: 6px;
+    margin: 0;
+}
+
+.status_ok {
+    background-color: rgba(144, 238, 144, 0.8);
+    border: 1px rgba(0, 128, 0, 0.8) solid;
+}
+
+.status_warning {
+    background-color: rgba(255, 255, 152, 0.8);
+    border: 1px rgba(184, 135, 11, 0.8) solid;
+}
+
+.status_error {
+    background-color: rgba(240, 128, 128, 0.8);
+    border: 1px rgba(139, 0, 0, 0.8) solid;
+}
+
+.botao:active {
+    background-color: var(--bg-button-color1-click);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.center {
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+
+    align-content: center;
+
+    text-align: center;
+}
+
+.animation {
+    -moz-transition: all 0.4ms ease;
+    -o-transition: all 0.4ms ease;
+    -webkit-transition: all 0.4ms ease;
+    transition: all 0.4ms ease;
+}
+
+.sombra {
+    box-shadow: 0 0.75rem 2rem rgb(10 20 70 / 10%);
+}
+
+.sombra:hover {
+    box-shadow: 0 0.75rem 2rem rgb(10 20 70 / 25%);
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+@media (orientation: portrait) {
+    .row {
+        flex-direction: column !important;
+    }
+
+    .botao,
+    select,
+    input[type=text],
+    textarea {
+        width: 100% !important;
+    }
+}

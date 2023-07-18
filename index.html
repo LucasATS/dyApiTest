@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dyAPI Test</title>
+
+    <!-- LOCAL -->
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+
+    <!-- React unpkg -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+<body class="col center">
+    <header class="center"
+        style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px; cursor: pointer;"
+        onclick="window.location.href = '/'">
+        <img src="icon.png" width="24px" height="24px" />
+        <h1 style="font-style: italic; font-weight: 24px;">dyAPITest</h1>
+    </header>
+
+    <section>
+        <div id="root"></div>
+    </section>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // COMPONENTES
+        const Botao = ({
+            className,
+            value = '',
+            style,
+            onClick = () => { }
+        }) => {
+            return (
+                <button
+                    type='button'
+                    value={'value'}
+                    onClick={onClick}
+                    style={{ ...style }}
+                    className={"animation sombra botao"}>
+                    {value}
+                </button>
+            );
+        };
+
+        function App(props) {
+            const [url, setUrl] = useState(null);
+            const [method, setMethod] = useState('GET');
+            const [headers, setHeaders] = useState('{ "Content-Type": "application/json" }');
+            const [mode, setMode] = useState(null);
+            const [body, setBody] = useState(null);
+
+            const [consoleLog, setConsoleLog] = useState('Console:');
+            const [codigo, setCodigo] = useState('Codigo:');
+
+            const [statusCode, setStatusCode] = useState(0);
+            const [statusLog, setStatusLog] = useState(null);
+
+            useEffect(() => {
+                let dadosDoLink = lerLink();
+
+                try {
+                    if (dadosDoLink !== null) {
+                        setMethod(dadosDoLink?.method);
+                        // setHeaders(dadosDoLink?.headers);
+                        setMode(dadosDoLink?.mode);
+                        setUrl(dadosDoLink?.url);
+                        setBody(dadosDoLink?.body);
+
+                        setStatusCode(dadosDoLink?.statusCode);
+                        setStatusLog(dadosDoLink?.statusLog);
+                        setConsoleLog(dadosDoLink?.consoleLog);
+
+                        dadosDoLink = null;
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+            }, []);
+
+            const handleInputChange = (event) => {
+                const { name, value } = event.target;
+
+                switch (name) {
+                    case 'url':
+                        setUrl(value);
+                        break;
+                    case 'method':
+                        setMethod(value);
+                        break;
+                    case 'headers':
+                        setHeaders(value);
+                        break;
+                    case 'mode':
+                        setMode(value);
+                        break;
+                    case 'body':
+                        setBody(value);
+                        break;
+                    default:
+                        break;
+                }
+            };
+
+            const handleSubmit = async (event) => {
+                if (url !== '' && url !== null) {
+                    const dados = {
+                        url: url,
+                        method: method, headers: headers,
+                        mode: mode, body: body,
+                    }
+
+                    const log = await submit(dados);
+
+                    setStatusCode(log?.status);
+                    setStatusLog(log?.ok);
+
+                    const text = await log?.text()
+                    try {
+                        setConsoleLog(JSON.stringify(JSON.parse(text), null, 2));
+                    } catch (error) {
+                        setConsoleLog(text);
+                    }
+                } else {
+                    alert('URL esta vazia');
+                }
+            };
+
+            const handleCompartilhar = async () => {
+                if (url !== '' && url !== null) {
+                    const dados = {
+                        url: url,
+                        method: method,
+                        // headers: headers,
+                        mode: mode,
+                        body: body,
+                        consoleLog: consoleLog,
+                        statusCode: statusCode,
+                        statusLog: statusLog,
+                    }
+                    gerarLink(dados);
+                } else {
+                    alert('URL esta vazia');
+                }
+            }
+
+            return (
+                <div className="row center" style={{ gap: 15 + 'px' }}>
+                    <form className="col center" style={{ gap: 15 + 'px' }}>
+                        <span className="row" style={{ gap: 10 + 'px' }}>
+                            <select className="sombra" value={method} name="method" onChange={handleInputChange}>
+                                <option>GET</option>
+                                <option>POST</option>
+                                <option>PUT</option>
+                                <option>DELETE</option>
+                                {/* <option>OPTIONS</option> */}
+                                {/* <option>HEAD</option> */}
+                            </select>
+                            <input className="sombra" placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} />
+                        </span>
+
+                        <input className="sombra" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
+
+                        <span className="col" style={{ gap: 10 + 'px' }}>
+                            <input type="text" className="sombra" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly />
+                            {/* <textarea className="sombra" placeholder="headers" value={headers} name="headers" readonly onChange={handleInputChange} /> */}
+                            <textarea className="sombra" placeholder="body" value={body} name="body" onChange={handleInputChange}
+                                onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
+                        </span>
+
+                        <span className="row" style={{ justifyContent: 'space-between', gap: 10 + 'px' }}>
+                            <Botao value="Compartilhar" onClick={handleCompartilhar} />
+                            <Botao value="submit" onClick={handleSubmit} />
+                        </span>
+                    </form>
+
+                    <span className="col" style={{ gap: 10 + 'px' }}>
+                        {statusLog !== null && <p className={`status_${statusLog ? 'ok' : 'error'} sombra`}>{statusCode}</p>}
+                        {/* <textarea className="sombra" value={codigo} readonly /> */}
+                        <textarea className="sombra" value={consoleLog} readonly />
+                    </span>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+
+    </script>
+
+    <BotaoVisitaGithub model="modelo3" link="#/LINK_AQUI"></BotaoVisitaGithub>
+    <script
+        src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
+</body>
+
+</html>
