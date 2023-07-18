@@ -30,13 +30,24 @@ const gerarLink = async (dados) => {
 
     await navigator.clipboard.writeText(window.location.origin + '/?' + base64String)
         .then(() => {
-            alert("String copiada para a área de transferência!");
+            Swal.fire({
+                title: 'Link copiada para a área de transferência!',
+                showCancelButton: true,
+                confirmButtonText: 'Redirecionar para link',
+                cancelButtonText: `Permanecer aqui`,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  Swal.fire('Redirecionando..', '', 'success')
+                  window.location.href = novoLink;
+                }
+              })
         })
         .catch(error => {
-            alert("Erro ao copiar para a área de transferência:", error);
+            alertaNaoFoiPossivelCompartilhar();
+            console.log("Erro ao copiar para a área de transferência:");
         });
 
-    window.location.href = novoLink;
 }
 
 const submit = async ({
@@ -74,7 +85,7 @@ const formatarJson = (txt) => {
     let texto = txt;
 
     if (texto === null || texto === '') {
-            return '';        
+        return '';
     }
 
     try {
@@ -94,11 +105,35 @@ const formatarJson = (txt) => {
 
         return objeto;
     } catch (error) {
-        alert('Erro ao converter o body em objeto 🙁');
+        alertaNaoFoiPossivelConverterJson();
         console.error('Erro ao converter o body em objeto 🙁', error);
         throw error;
     }
 };
+
+const alertaUrlVazia = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'A URL fornecida está esta vazia 🙁',
+    });
+}
+
+const alertaNaoFoiPossivelConverterJson = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não foi possível converter o body em objeto 🙁',
+    });
+}
+
+const alertaNaoFoiPossivelCompartilhar = () => {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não foi possível copiar para a área de transferência 😢',
+    });
+}
 
 // const submit = async ({
 //     url = '',

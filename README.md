@@ -13,14 +13,22 @@
 ## __📂 PLAY__
 > Apenas edite o index.html
 
-> Se vc tiver python, use python.exe -m http.server 8000
+> Se você tiver python, use python.exe -m http.server 3002
 
 ## __🎯 METAS__
 - [X] Ser simples
+- [X] Sistema de API
+- [X] Sistema para ler link, salvar link
+- [X] Formatador de texto para json
+- [X] Alertas mais elegantes
+- [ ] Melhorar arquiterura para ficar mais legivel
 - [ ] Reconstruir lógica para o header
 - [ ] Permitir enviar arquivos
 - [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
 - [ ] Thema dracula - dark, salvar preferencia do thema nos cookies
+- [ ] Titulo da API (ex: API para login)
+- [ ] Menu lateral para selecionar APIs
+- [ ] Adicionar multiplos APIs para uso (arrey no link)
 
 <!--
 ## __❤ AGRADECIMENTOS__
@@ -29,10 +37,10 @@
 
 ## __🛠 TECNOLOGIAS__ 
 
-    ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
-    ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-    ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-    ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
 ## __😘 CONTATO__ <ALTERE APENAS OS LINKS DOS HREF>
 <p align="left">

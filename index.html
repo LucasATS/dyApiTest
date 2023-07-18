@@ -16,6 +16,9 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <!-- Alertas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="col center">
@@ -131,7 +134,7 @@
                         setConsoleLog(text);
                     }
                 } else {
-                    alert('URL esta vazia');
+                    alertaUrlVazia();
                 }
             };
 
@@ -149,7 +152,7 @@
                     }
                     gerarLink(dados);
                 } else {
-                    alert('URL esta vazia');
+                    alertaUrlVazia();
                 }
             }
 
@@ -197,7 +200,7 @@
 
     </script>
 
-    <BotaoVisitaGithub model="modelo3" link="#/LINK_AQUI"></BotaoVisitaGithub>
+    <BotaoVisitaGithub model="modelo3" link="https://github.com/LucasATS/dyApiTest"></BotaoVisitaGithub>
     <script
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
 </body>
