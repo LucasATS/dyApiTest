@@ -6,9 +6,9 @@
 
     FEITO POR https://github.com/LucasATS
 
-[![preview](./.github/preview.png)](https://lucasats.github.io/LINK/)
+[![preview](./.github/preview-xl.png)](https://dyapitest.vercel.app/)
 
-[🔗 ACESSE O PROJETO ](https://lucasats.github.io/LINK/)
+[🔗 ACESSE O PROJETO ](https://dyapitest.vercel.app/)
 
 ## __📂 PLAY__
 > Apenas edite o index.html
