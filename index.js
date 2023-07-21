@@ -59,8 +59,8 @@ const submit = async ({
 }) => {
     let options = {
         method: method,
-        // headers: JSON.stringify(formatarJson(headers)),
-        headers: JSON.parse(headers),
+        headers: JSON.parse(JSON.stringify(formatarJson(headers))),
+        // headers: JSON.parse(headers),
     };
 
     if (mode !== '') {

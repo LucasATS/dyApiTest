@@ -174,8 +174,9 @@
                         <input className="sombra" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
 
                         <span className="col" style={{ gap: 10 + 'px' }}>
-                            <input type="text" className="sombra" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly />
-                            {/* <textarea className="sombra" placeholder="headers" value={headers} name="headers" readonly onChange={handleInputChange} /> */}
+                            {/* <input type="text" className="sombra" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
+                            <textarea className="sombra" placeholder="headers" value={headers} name="headers" onChange={handleInputChange}
+                                onBlur={() => { setHeaders(JSON.stringify(formatarJson(headers), null, 2)) }} />
                             <textarea className="sombra" placeholder="body" value={body} name="body" onChange={handleInputChange}
                                 onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
                         </span>
