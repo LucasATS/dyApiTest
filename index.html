@@ -191,7 +191,7 @@
                         {statusLog !== null && <p className={`status_${statusLog ? 'ok' : 'error'} `}>{statusCode} {statusCodeParaTexto(statusCode)}</p>}
                         {/* <textarea className="" value={codigo} readonly /> */}
                         <textarea className="" value={consoleLog} readonly
-                            onBlur={() => { setBody(JSON.stringify(consoleLog, null, 2) || consoleLog) }} />
+                            onBlur={() => { setConsoleLog(JSON.stringify(consoleLog, null, 2) || consoleLog) }} />
                     </span>
                 </div>
             );
