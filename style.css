@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #fafafa;
+    --bg-color: #f5f9fa;
 
     --font-color1: #343434;
 
-    --border-input: #f2b84b68;
+    --border-input: #748186;
 
-    --bg-button-color1: #F2B84B;
-    --bg-button-color1-click: #F2E750;
+    --bg-button-color1: #afeaff;
+    --bg-button-color1-click: #79dbff;
 }
 
 html,
@@ -88,17 +88,17 @@ textarea:hover {
 
 .status_ok {
     background-color: rgba(144, 238, 144, 0.8);
-    border: 1px rgba(0, 128, 0, 0.8) solid;
+    border: 2px rgba(0, 128, 0, 0.8) solid;
 }
 
 .status_warning {
     background-color: rgba(255, 255, 152, 0.8);
-    border: 1px rgba(184, 135, 11, 0.8) solid;
+    border: 2px rgba(184, 135, 11, 0.8) solid;
 }
 
 .status_error {
     background-color: rgba(240, 128, 128, 0.8);
-    border: 1px rgba(139, 0, 0, 0.8) solid;
+    border: 2px rgba(139, 0, 0, 0.8) solid;
 }
 
 .botao:active {

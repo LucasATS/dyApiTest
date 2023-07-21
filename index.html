@@ -49,7 +49,7 @@
                     value={'value'}
                     onClick={onClick}
                     style={{ ...style }}
-                    className={"animation sombra botao"}>
+                    className={"animation  botao"}>
                     {value}
                 </button>
             );
@@ -74,7 +74,7 @@
                 try {
                     if (dadosDoLink !== null) {
                         setMethod(dadosDoLink?.method);
-                        // setHeaders(dadosDoLink?.headers);
+                        setHeaders(dadosDoLink?.headers);
                         setMode(dadosDoLink?.mode);
                         setUrl(dadosDoLink?.url);
                         setBody(dadosDoLink?.body);
@@ -160,7 +160,7 @@
                 <div className="row center" style={{ gap: 15 + 'px' }}>
                     <form className="col center" style={{ gap: 15 + 'px' }}>
                         <span className="row" style={{ gap: 10 + 'px' }}>
-                            <select className="sombra" value={method} name="method" onChange={handleInputChange}>
+                            <select className="" value={method} name="method" onChange={handleInputChange}>
                                 <option>GET</option>
                                 <option>POST</option>
                                 <option>PUT</option>
@@ -168,16 +168,16 @@
                                 {/* <option>OPTIONS</option> */}
                                 {/* <option>HEAD</option> */}
                             </select>
-                            <input className="sombra" placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} />
+                            <input className="" placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} />
                         </span>
 
-                        <input className="sombra" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
+                        <input className="" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
 
                         <span className="col" style={{ gap: 10 + 'px' }}>
-                            {/* <input type="text" className="sombra" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
-                            <textarea className="sombra" placeholder="headers" value={headers} name="headers" onChange={handleInputChange}
+                            {/* <input type="text" className="" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
+                            <textarea className="" placeholder="headers" value={headers} name="headers" onChange={handleInputChange}
                                 onBlur={() => { setHeaders(JSON.stringify(formatarJson(headers), null, 2)) }} />
-                            <textarea className="sombra" placeholder="body" value={body} name="body" onChange={handleInputChange}
+                            <textarea className="" placeholder="body" value={body} name="body" onChange={handleInputChange}
                                 onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
                         </span>
 
@@ -188,9 +188,9 @@
                     </form>
 
                     <span className="col" style={{ gap: 10 + 'px' }}>
-                        {statusLog !== null && <p className={`status_${statusLog ? 'ok' : 'error'} sombra`}>{statusCode}</p>}
-                        {/* <textarea className="sombra" value={codigo} readonly /> */}
-                        <textarea className="sombra" value={consoleLog} readonly />
+                        {statusLog !== null && <p className={`status_${statusLog ? 'ok' : 'error'} `}>{statusCode} {statusCodeParaTexto(statusCode)}</p>}
+                        {/* <textarea className="" value={codigo} readonly /> */}
+                        <textarea className="" value={consoleLog} readonly />
                     </span>
                 </div>
             );
