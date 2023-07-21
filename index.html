@@ -143,10 +143,10 @@
                     const dados = {
                         url: url,
                         method: method,
-                        // headers: headers,
+                        headers: JSON.stringify(JSON.parse(headers)),
                         mode: mode,
-                        body: body,
-                        consoleLog: consoleLog,
+                        body: JSON.stringify(JSON.parse(body)),
+                        consoleLog: JSON.stringify(JSON.parse(consoleLog)),
                         statusCode: statusCode,
                         statusLog: statusLog,
                     }

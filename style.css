@@ -3,6 +3,7 @@
 
     --font-color1: #343434;
 
+    --bg-input: #fbfbfb;
     --border-input: #748186;
 
     --bg-button-color1: #afeaff;
@@ -41,6 +42,7 @@ select,
 input[type=text],
 textarea {
     border: 2px var(--border-input) solid;
+    background-color: var(--bg-input);
 }
 
 .botao,
@@ -74,16 +76,22 @@ textarea:hover {
     cursor: pointer;
 }
 
+.status_log,
 .status_ok,
 .status_warning,
 .status_error {
     font-weight: 600;
-    height: 20px;
+    min-height: 20px;
     display: flex;
     align-items: center;
     border-radius: 6px;
     padding: 6px;
     margin: 0;
+}
+
+.status_log {
+    background-color: #f2ffff;
+    border: 2px #ccd7d7 solid;
 }
 
 .status_ok {

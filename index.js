@@ -31,7 +31,7 @@ const gerarLink = async (dados) => {
     await navigator.clipboard.writeText(window.location.origin + '/?' + base64String)
         .then(() => {
             Swal.fire({
-                title: 'Link copiada para a área de transferência!',
+                title: '<h5>Link copiada para a área de transferência 🥰</h5><h6>O site está passando por mudanças e, por esse motivo, algumas estruturas poderão ser alteradas ⚠️</h6>',
                 showCancelButton: true,
                 confirmButtonText: 'Redirecionar para link',
                 cancelButtonText: `Permanecer aqui`,
@@ -81,15 +81,13 @@ const submit = async ({
     return response;
 }
 
+
 const formatarJson = (txt) => {
     let texto = txt;
 
-    if (texto === null || texto === '') {
-        return '';
-    }
+    if (!texto || texto.trim() === '' || texto === null) return '';
 
     try {
-
         texto = texto.replace(/([{,]\s*)([A-Za-z0-9_\-]+)\s*:/g, (match, p1, p2) => {
             return p1 + '"' + p2.trim() + '":';
         });
@@ -105,11 +103,12 @@ const formatarJson = (txt) => {
 
         return objeto;
     } catch (error) {
-        alertaNaoFoiPossivelConverterJson();
+        alertaNaoFoiPossivelConverterJson('Erro de sintaxe JSON inválido');
         console.error('Erro ao converter o body em objeto 🙁', error);
         throw error;
     }
 };
+
 
 const alertaUrlVazia = () => {
     Swal.fire({
