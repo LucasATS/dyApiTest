@@ -8,25 +8,33 @@
 
     <!-- LOCAL -->
     <link rel="icon" type="image/x-icon" href="imgs/icon.png">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">    
+    <script src="js/cookies.js"></script>
+    <script src="js/style.js"></script>
 </head>
 
 <body class="col center">
-    <header class="center"
-        style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px; cursor: pointer;"
-        onclick="window.location.href = window.location.origin">
-        <img src="imgs/icon.png" width="24px" height="24px" />
-        <h1 style="font-style: italic; font-weight: 24px;">dyAPITest</h1>
+    <header class="row center" style="justify-content: space-between;">
+        <span style="width: 100px; margin: 10px"></span>
+
+        <nav class="center logo" style="cursor: pointer;" onclick="window.location.href = window.location.origin">
+            <img src="imgs/icon.png" width="24px" height="24px" />
+            <h1 style="font-style: italic; font-weight: 24px; color: var(--font-color-logo);">dyAPITest</h1>
+        </nav>
+
+        <select style="width: 100px; margin: 10px;" id="select-tema" onchange="handleSelectionTemaChange()"></select>
+        <script>optionsSelectTema();</script>
     </header>
 
-    <p>Sobre...</p>
+
+    <p>Em breve...</p>
+
 
     <BotaoVisitaGithub model="modelo3" link="https://github.com/LucasATS/dyApiTest"></BotaoVisitaGithub>
     <script
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
-
     <footer>
-        <p class="version"> 20230722v</p>
+        <p onclick="window.location.href = './sobre.html'" class="version">20230722-4v</p>
     </footer>
 </body>
 

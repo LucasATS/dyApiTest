@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head>
+<head class="animation">
     <html lang="pt-br">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,8 @@
     <!-- LOCAL -->
     <link rel="icon" type="image/x-icon" href="imgs/icon.png">
     <link rel="stylesheet" href="css/index.css">
+    <script src="js/cookies.js"></script>
+    <script src="js/style.js"></script>
     <script src="js/formatadorJSON.js"></script>
     <script src="js/sistemaLinks.js"></script>
     <script src="js/statusCode.js"></script>
@@ -22,16 +24,21 @@
 
     <!-- OUTROS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script> <!-- Compressor -->
 
 </head>
 
-<body class="col center">
-    <header class="center"
-        style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px;">
-        <img src="imgs/icon.png" width="24px" height="24px" />
-        <h1 style="font-style: italic; font-weight: 24px;">dyAPITest</h1>
+<body class="col center animation">
+    <header class="row center" style="justify-content: space-between;">
+        <span style="width: 100px; margin: 10px"></span>
+
+        <nav class="center logo">
+            <img src="imgs/icon.png" width="24px" height="24px" />
+            <h1 style="font-style: italic; font-weight: 24px; color: var(--font-color-logo);">dyAPITest</h1>
+        </nav>
+
+        <select style="width: 100px; margin: 10px;" id="select-tema" onchange="handleSelectionTemaChange()"></select>
+        <script>optionsSelectTema();</script>
     </header>
 
     <section>
@@ -197,7 +204,7 @@
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
 
     <footer>
-        <p onclick="window.location.href = './sobre.html'" class="version"> 20230722-3v</p>
+        <p onclick="window.location.href = './sobre.html'" class="version"> 20230722-4v</p>
     </footer>
 </body>
 

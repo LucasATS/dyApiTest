@@ -1,0 +1,30 @@
+    ISSO É APENAS UMA IDEIA, MAS SERIA LEGAL IMPLEMENTAR ALGO ASSIM NO FUTURO
+    
+    https://github.com/josdejong/jsoneditor/blob/master/docs/usage.md  
+       
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor.css"
+        integrity="sha512-/JghmMAi5bleEgj1BT7h7Jm2+o4I4AbJYRVaY3eGGfdyTzV+yW3n0IedWH4ysbws5zpNK1beCqVJh0MSZxvNaA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    
+    <!-- <div id="jsoneditor" style="width: 100%; height: 400px;"></div> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.10.2/jsoneditor-minimalist.js"
+        integrity="sha512-H0X4c02ARmY4wCJ2CzRFfKWnB6ZrLFqsD9JYB3ljTOCtjSJB63Nfq/GUumYW3NMQRX3R2B8BH56DAywT4tQv6w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Criar uma instância do JSONEditor
+        var container = document.getElementById("jsoneditor");
+        var options = {
+            mode: 'tree'
+        };
+        var editor = new JSONEditor(container, options);
+
+        // Definir o objeto JSON para ser editado
+        var json = {
+            nome: "Exemplo",
+            idade: 30,
+            cidade: "Exemplolandia"
+        };
+
+        // Definir o objeto JSON no editor
+        editor.set(json);
+    </script> -->

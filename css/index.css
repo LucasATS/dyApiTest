@@ -1,13 +1,38 @@
 :root {
     --bg-color: #f5f9fa;
+    --font-color1: #101010;
+    --placeholder: #777777;
 
-    --font-color1: #343434;
+    --bg-color-logo: #e2ebed;
+    --font-color-logo: #000000;
+
 
     --bg-input: #fbfbfb;
-    --border-input: #748186;
+    --border-input: #e2ebed;
+
 
     --bg-button-color1: #afeaff;
     --bg-button-color1-click: #79dbff;
+
+
+    --bg-scroll-track: #f1f1f1;
+    --bg-scroll-thumb: #afeaff;
+
+
+    /* STATUS CODE */
+    --bg-status-log: #f2ffff;
+    --border-status-log: #ccd7d7;
+
+    --bg-status-ok: #90ee90cc;
+    --border-status-ok: #008000cc;
+
+    --bg-status-warning: #ffff98cc;
+    --border-status-warning: #b8870bcc;
+
+    --bg-status-error: #f08080cc;
+    --border-status-error: #8b0000cc;
+
+    --font-status: #000000;
 }
 
 html,
@@ -21,8 +46,12 @@ body {
     tab-size: 4;
 
     background-color: var(--bg-color);
+    color: var(--font-color1);
 
     font-size: 14px;
+
+    margin: 0;
+    padding: 0;
 }
 
 input[type=text] {
@@ -43,6 +72,7 @@ input[type=text],
 textarea {
     border: 2px var(--border-input) solid;
     background-color: var(--bg-input);
+    color: var(--font-color1);
 }
 
 .botao,
@@ -57,6 +87,25 @@ textarea {
 
     outline: none;
     border-radius: 6px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    column-gap: 15px;
+
+    height: 50px;
+    width: 150px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    margin: 15px 0px 20px 0px;
+
+    border-radius: 6px;
+    background-color: var(--bg-color-logo);
 }
 
 .botao {
@@ -87,26 +136,27 @@ textarea:hover {
     border-radius: 6px;
     padding: 6px;
     margin: 0;
+    color: var(--font-status);
 }
 
 .status_log {
-    background-color: #f2ffff;
-    border: 2px #ccd7d7 solid;
+    background-color: var(--bg-status-log);
+    border: 2px var(--border-status-log) solid;
 }
 
 .status_ok {
-    background-color: rgba(144, 238, 144, 0.8);
-    border: 2px rgba(0, 128, 0, 0.8) solid;
+    background-color: var(--bg-status-ok);
+    border: 2px var(--border-status-ok) solid;
 }
 
 .status_warning {
-    background-color: rgba(255, 255, 152, 0.8);
-    border: 2px rgba(184, 135, 11, 0.8) solid;
+    background-color: var(--bg-status-warning);
+    border: 2px var(--border-status-warning) solid;
 }
 
 .status_error {
-    background-color: rgba(240, 128, 128, 0.8);
-    border: 2px rgba(139, 0, 0, 0.8) solid;
+    background-color: var(--bg-status-error);
+    border: 2px var(--border-status-error) solid;
 }
 
 .botao:active {
@@ -138,6 +188,8 @@ textarea:hover {
     -o-transition: all 0.4ms ease;
     -webkit-transition: all 0.4ms ease;
     transition: all 0.4ms ease;
+
+    transition: background 0.2s ease;
 }
 
 .sombra {
@@ -153,12 +205,31 @@ textarea:hover {
 }
 
 .version {
+    color: var(--font-color1);
     position: fixed;
     transform: translate(-50%, 50%);
     bottom: 5px;
-    left: 5%;
     opacity: 80%;
+    left: 5%;
     cursor: pointer;
+}
+
+::placeholder {
+    color: var(--placeholder);
+    opacity: 1;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-scroll-thumb);
+    border-radius: 3px;
 }
 
 @media (orientation: portrait) {
