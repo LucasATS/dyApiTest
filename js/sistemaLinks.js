@@ -45,12 +45,13 @@ const lerLink = async () => {
 const gerarLink = async (dados) => {
     try {
         const jsonString = JSON.stringify(dados);
-        const compressedString = LZString.compressToBase64(await compress(jsonString));
+        const compressedString = LZString.compressToBase64(jsonString);
         const urlFriendlyCode = encodeURIComponent(compressedString);
 
-        // const linkOrigin = window.location.origin;
-        const linkOrigin = './index.html'
-        const link = `${linkOrigin}?${urlFriendlyCode}`;
+        const linkOrigin = window.location.origin;
+        alert('DEBUG: ON!')
+        // const linkOrigin = './index.html'
+        const link = `${linkOrigin}/?${urlFriendlyCode}`;
         modalRedirecionarLink(link);
     } catch (error) {
         modalErro(mensagens.erroAoGerarLink);
