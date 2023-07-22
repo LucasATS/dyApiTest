@@ -19,8 +19,8 @@ const formatarJson = (txt) => {
 
         return objeto;
     } catch (error) {
-        alertaErro(mensagensAlerta.erroDeSintex);
-        console.error(mensagensAlerta.erroDeSintex, error);
+        modalErro(mensagens.erroDeSintex);
+        console.error(mensagens.erroDeSintex, error);
         throw error;
     }
 };
