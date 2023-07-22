@@ -1,52 +1,59 @@
-const lerLink = () => {
-    var data = window.location.search;
+// async function compressToString(string, encoding = 'gzip') {
+//     const byteArray = new TextEncoder().encode(string);
+//     const cs = new CompressionStream(encoding);
+//     const writer = cs.writable.getWriter();
+//     writer.write(byteArray);
+//     writer.close();
 
-    if (data === '') return null;
+//     const compressedArrayBuffer = await new Response(cs.readable).arrayBuffer();
+//     const compressedUint8Array = new Uint8Array(compressedArrayBuffer);
 
-    if (data.startsWith("?")) {
-        data = data.substring(1);
-    }
+//     const textDecoder = new TextDecoder();
+//     const compressedString = textDecoder.decode(compressedUint8Array);
 
-    var decodedString = atob(data);
+//     return compressedString;
+// }
 
+
+// async function decompress(byteArray, encoding = 'gzip') {
+//     const cs = new DecompressionStream(encoding);
+//     const writer = cs.writable.getWriter();
+//     writer.write(byteArray);
+//     writer.close();
+//     const arrayBuffer = await new Response(cs.readable).arrayBuffer();
+//     return new TextDecoder().decode(arrayBuffer);
+// }
+
+
+const lerLink = async () => {
     try {
-        return objeto = JSON.parse(decodedString);
+        const data = window.location.search.slice(1);
+        if (!data) return null;
+
+        const decompressedString = LZString.decompressFromBase64(decodeURIComponent(data));
+        console.log(decompressedString);
+        console.log(decompress(decompressedString));
+        return JSON.parse(decompressedString);
     } catch (error) {
-        alertaErro(mensagensAlerta.erroLinkDecoder);
-        console.error(mensagensAlerta.erroLinkDecoder, error);
+        modalErro(mensagens.erroLinkDecoder);
+        console.error('Erro ao interpretar o link:', error);
         return null;
     }
-}
+};
 
 
 const gerarLink = async (dados) => {
-    const jsonString = JSON.stringify(dados);
+    try {
+        const jsonString = JSON.stringify(dados);
+        const compressedString = LZString.compressToBase64(await compress(jsonString));
+        const urlFriendlyCode = encodeURIComponent(compressedString);
 
-    let encoder = new TextEncoder();
-    let dataBytes = encoder.encode(jsonString);
-
-    let base64String = btoa(String.fromCharCode.apply(null, dataBytes));
-
-    const novoLink = window.location.origin + '/?' + base64String;
-
-    await navigator.clipboard.writeText(window.location.origin + '/?' + base64String)
-        .then(() => {
-            Swal.fire({
-                title: '<h5>Link copiada para a área de transferência 🥰</h5><h6>O site está passando por mudanças e, por esse motivo, algumas estruturas poderão ser alteradas ⚠️</h6>',
-                showCancelButton: true,
-                confirmButtonText: 'Redirecionar para link',
-                cancelButtonText: `Permanecer aqui`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    Swal.fire('Redirecionando..', '', 'success')
-                    window.location.href = novoLink;
-                }
-            })
-        })
-        .catch(error => {
-            alertaErro(mensagensAlerta.erroAoCopiar);
-            console.log(mensagensAlerta.erroAoCopiar);
-        });
-
-}
+        // const linkOrigin = window.location.origin;
+        const linkOrigin = './index.html'
+        const link = `${linkOrigin}?${urlFriendlyCode}`;
+        modalRedirecionarLink(link);
+    } catch (error) {
+        modalErro(mensagens.erroAoGerarLink);
+        console.error('Erro ao gerar o link:', error);
+    }
+};

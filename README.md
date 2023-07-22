@@ -22,10 +22,12 @@
 - [X] Formatador de texto para json
 - [X] Alertas mais elegantes
 - [X] Melhorar arquitetura para ficar mais legivel
+- [ ] Melhorar sistema de link, otimizar os links para poderem ter mais informações
+- [ ] Adicionar CEO
+- [ ] Thema dracula - dark, salvar preferencia do thema nos cookies
 - [ ] Reconstruir lógica para o header
 - [ ] Permitir enviar arquivos
 - [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
-- [ ] Thema dracula - dark, salvar preferencia do thema nos cookies
 - [ ] Titulo da API (ex: API para login)
 - [ ] Menu lateral para selecionar APIs
 - [ ] Adicionar multiplos APIs para uso (arrey no link)

@@ -12,23 +12,24 @@
     <script src="js/formatadorJSON.js"></script>
     <script src="js/sistemaLinks.js"></script>
     <script src="js/statusCode.js"></script>
-    <script src="js/alertas.js"></script>
+    <script src="js/modals.js"></script>
     <script src="js/index.js"></script>
 
-    <!-- React unpkg -->
+    <!-- REACT UNPKG -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Alertas -->
+    <!-- OUTROS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
 
 </head>
 
 <body class="col center">
     <header class="center"
-        style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px; cursor: pointer;"
-        onclick="window.location.href = '/'">
+        style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px;">
         <img src="imgs/icon.png" width="24px" height="24px" />
         <h1 style="font-style: italic; font-weight: 24px;">dyAPITest</h1>
     </header>
@@ -47,8 +48,8 @@
             const [mode, setMode] = useState(null);
             const [body, setBody] = useState(null);
 
-            const [consoleLog, setConsoleLog] = useState('Console:');
-            const [codigo, setCodigo] = useState('Codigo:');
+            const [consoleLog, setConsoleLog] = useState(null);
+            const [codigo, setCodigo] = useState(null);
 
             const [statusCode, setStatusCode] = useState(0);
 
@@ -58,13 +59,13 @@
                 try {
                     if (dadosDoLink !== null) {
                         setMethod(dadosDoLink?.method);
-                        setHeaders(dadosDoLink?.headers);
+                        setHeaders(JSON.stringify(JSON.parse(dadosDoLink?.headers), null, 2) || dadosDoLink?.headers);
                         setMode(dadosDoLink?.mode);
                         setUrl(dadosDoLink?.url);
-                        setBody(dadosDoLink?.body);
+                        setBody(JSON.stringify(JSON.parse(dadosDoLink?.body), null, 2) || dadosDoLink?.body);
 
                         setStatusCode(dadosDoLink?.statusCode);
-                        setConsoleLog(dadosDoLink?.consoleLog);
+                        setConsoleLog(JSON.stringify(JSON.parse(dadosDoLink?.consoleLog), null, 2) || dadosDoLink?.consoleLog);
 
                         dadosDoLink = null;
                     }
@@ -104,7 +105,7 @@
                         method: method, headers: headers,
                         mode: mode, body: body,
                     }
-
+                    console.log(dados);
                     const log = await submit(dados);
 
                     setStatusCode(log?.status);
@@ -116,7 +117,7 @@
                         setConsoleLog(text);
                     }
                 } else {
-                    alertaErro(mensagensAlerta.erroSemURL)
+                    modalErro(mensagens.erroSemURL)
                 }
             };
 
@@ -133,7 +134,7 @@
                     }
                     gerarLink(dados);
                 } else {
-                    alertaErro(mensagensAlerta.erroSemURL)
+                    modalErro(mensagens.erroSemURL)
                 }
             }
 
@@ -177,11 +178,11 @@
                             <p className={`status_${statusCodeParaTexto(statusCode)?.ok}`}>{statusCode} {statusCodeParaTexto(statusCode)?.msg}</p>
                         }
                         {/* <textarea className="" value={codigo} readonly /> */}
-                        <textarea className="" value={consoleLog} readonly
+                        <textarea className="" placeholder="Console:" value={consoleLog} readonly
                             onBlur={() => { setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2) || consoleLog) }} />
                     </span>
 
-                    
+
                 </div>
             );
         }
@@ -196,7 +197,7 @@
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
 
     <footer>
-        <p class="version"> 20230722v</p>
+        <p onclick="window.location.href = './sobre.html'" class="version"> 20230722v</p>
     </footer>
 </body>
 

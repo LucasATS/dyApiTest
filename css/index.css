@@ -157,8 +157,8 @@ textarea:hover {
     transform: translate(-50%, 50%);
     bottom: 5px;
     left: 5%;
-    pointer-events: none;
     opacity: 80%;
+    cursor: pointer;
 }
 
 @media (orientation: portrait) {
