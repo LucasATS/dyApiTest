@@ -1,6 +1,3 @@
-
-
-
 const lerLink = () => {
     try {
         const data = window.location.search.slice(1);
@@ -22,9 +19,9 @@ const gerarLink = async (dados) => {
         const compressedString = LZString.compressToBase64(jsonString);
         const urlFriendlyCode = encodeURIComponent(compressedString);
 
-        // const linkOrigin = window.location.origin;
-        const linkOrigin = './index.html'
-        const link = `${linkOrigin}?${urlFriendlyCode}`;
+        const linkOrigin = window.location.origin;
+        // const linkOrigin = './index.html'
+        const link = `${linkOrigin}/?${urlFriendlyCode}`;
         modalRedirecionarLink(link);
     } catch (error) {
         modalErro(mensagens.erroAoGerarLink);
