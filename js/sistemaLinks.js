@@ -49,7 +49,7 @@ const gerarLink = async (dados) => {
         const urlFriendlyCode = encodeURIComponent(compressedString);
 
         const linkOrigin = window.location.origin;
-        alert('DEBUG: ON!')
+        // alert('DEBUG: ON!')
         // const linkOrigin = './index.html'
         const link = `${linkOrigin}/?${urlFriendlyCode}`;
         modalRedirecionarLink(link);

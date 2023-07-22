@@ -7,7 +7,6 @@ const modalErro = (msg) => {
 }
 
 
-
 const modalRedirecionarLink = async (link) => {
     await navigator.clipboard.writeText(link)
         .then(() => {
