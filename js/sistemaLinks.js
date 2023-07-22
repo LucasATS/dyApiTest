@@ -20,8 +20,12 @@ const gerarLink = async (dados) => {
         const urlFriendlyCode = encodeURIComponent(compressedString);
 
         const linkOrigin = window.location.origin;
-        // const linkOrigin = './index.html'
-        const link = `${linkOrigin}/?${urlFriendlyCode}`;
+        let link = `${linkOrigin}/?${urlFriendlyCode}`;
+
+        // LOCAL
+        if (linkOrigin === 'file://')
+            link = `./index.html?${urlFriendlyCode}`;
+
         modalRedirecionarLink(link);
     } catch (error) {
         modalErro(mensagens.erroAoGerarLink);
