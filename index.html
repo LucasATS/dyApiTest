@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
 
 <head>
+    <html lang="pt-br">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dyAPI Test</title>
 
     <!-- LOCAL -->
-    <link rel="icon" type="image/x-icon" href="icon.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
+    <link rel="icon" type="image/x-icon" href="imgs/icon.png">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/formatadorJSON.js"></script>
+    <script src="js/sistemaLinks.js"></script>
+    <script src="js/statusCode.js"></script>
+    <script src="js/alertas.js"></script>
+    <script src="js/index.js"></script>
 
     <!-- React unpkg -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -25,7 +29,7 @@
     <header class="center"
         style="display: flex; flex-direction: row; align-self: center; align-items: center; width: 200px; column-gap: 15px; cursor: pointer;"
         onclick="window.location.href = '/'">
-        <img src="icon.png" width="24px" height="24px" />
+        <img src="imgs/icon.png" width="24px" height="24px" />
         <h1 style="font-style: italic; font-weight: 24px;">dyAPITest</h1>
     </header>
 
@@ -35,25 +39,6 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-
-        // COMPONENTES
-        const Botao = ({
-            className,
-            value = '',
-            style,
-            onClick = () => { }
-        }) => {
-            return (
-                <button
-                    type='button'
-                    value={'value'}
-                    onClick={onClick}
-                    style={{ ...style }}
-                    className={"animation  botao"}>
-                    {value}
-                </button>
-            );
-        };
 
         function App(props) {
             const [url, setUrl] = useState(null);
@@ -66,7 +51,6 @@
             const [codigo, setCodigo] = useState('Codigo:');
 
             const [statusCode, setStatusCode] = useState(0);
-            const [statusLog, setStatusLog] = useState(null);
 
             useEffect(() => {
                 let dadosDoLink = lerLink();
@@ -80,7 +64,6 @@
                         setBody(dadosDoLink?.body);
 
                         setStatusCode(dadosDoLink?.statusCode);
-                        setStatusLog(dadosDoLink?.statusLog);
                         setConsoleLog(dadosDoLink?.consoleLog);
 
                         dadosDoLink = null;
@@ -125,7 +108,6 @@
                     const log = await submit(dados);
 
                     setStatusCode(log?.status);
-                    setStatusLog(log?.ok);
 
                     const text = await log?.text()
                     try {
@@ -134,7 +116,7 @@
                         setConsoleLog(text);
                     }
                 } else {
-                    alertaUrlVazia();
+                    alertaErro(mensagensAlerta.erroSemURL)
                 }
             };
 
@@ -148,11 +130,10 @@
                         body: JSON.stringify(JSON.parse(body)),
                         consoleLog: JSON.stringify(JSON.parse(consoleLog)),
                         statusCode: statusCode,
-                        statusLog: statusLog,
                     }
                     gerarLink(dados);
                 } else {
-                    alertaUrlVazia();
+                    alertaErro(mensagensAlerta.erroSemURL)
                 }
             }
 
@@ -171,7 +152,9 @@
                             <input className="" placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} />
                         </span>
 
+
                         <input className="" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
+
 
                         <span className="col" style={{ gap: 10 + 'px' }}>
                             {/* <input type="text" className="" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
@@ -181,18 +164,24 @@
                                 onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
                         </span>
 
+
                         <span className="row" style={{ justifyContent: 'space-between', gap: 10 + 'px' }}>
-                            <Botao value="Compartilhar" onClick={handleCompartilhar} />
-                            <Botao value="submit" onClick={handleSubmit} />
+                            <button type="button" onClick={handleCompartilhar} className={"animation botao"}>Compartilhar</button>
+                            <button type="button" onClick={handleSubmit} className={"animation botao"}>submit</button>
                         </span>
                     </form>
 
+
                     <span className="col" style={{ gap: 10 + 'px' }}>
-                        {statusLog !== null && <p className={`status_${statusLog ? 'ok' : 'error'} `}>{statusCode} {statusCodeParaTexto(statusCode)}</p>}
+                        {statusCode !== 0 &&
+                            <p className={`status_${statusCodeParaTexto(statusCode)?.ok}`}>{statusCode} {statusCodeParaTexto(statusCode)?.msg}</p>
+                        }
                         {/* <textarea className="" value={codigo} readonly /> */}
                         <textarea className="" value={consoleLog} readonly
                             onBlur={() => { setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2) || consoleLog) }} />
                     </span>
+
+                    
                 </div>
             );
         }
@@ -206,6 +195,9 @@
     <script
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
 
-    <p style="position: fixed; transform: translate(-50%, 50%); bottom: 5px; left: 5%; pointer-events: none; opacity: 80%;">20230721.3v</p>
+    <footer>
+        <p class="version"> 20230722v</p>
+    </footer>
 </body>
+
 </html>

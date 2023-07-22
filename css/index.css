@@ -152,6 +152,15 @@ textarea:hover {
     transition: all 0.4s ease;
 }
 
+.version {
+    position: fixed;
+    transform: translate(-50%, 50%);
+    bottom: 5px;
+    left: 5%;
+    pointer-events: none;
+    opacity: 80%;
+}
+
 @media (orientation: portrait) {
     .row {
         flex-direction: column !important;
