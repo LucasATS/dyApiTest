@@ -5,7 +5,7 @@ const setCookie = (chave, valor, exdays = 100) => {
     const cookie = `${chave}=${valor}; expires=${dataExpiracao.toUTCString()}; path=/`;
     document.cookie = cookie;
 
-    console.log('Cookie salvo:', cookie);
+    // console.log('Cookie salvo:', cookie);
 }
 
 
@@ -16,11 +16,11 @@ const getCookie = (chave) => {
         const [nome, valor] = cookie.trim().split('=');
 
         if (nome === chave) {
-            console.log('Valor do cookie:', valor);
+            // console.log('Valor do cookie:', valor);
             return valor;
         }
     }
 
-    console.log('Cookie não encontrado.');
+    // console.log('Cookie não encontrado.');
     return null;
 }

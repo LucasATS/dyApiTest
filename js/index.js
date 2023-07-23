@@ -28,21 +28,3 @@ const submit = async ({
     console.log(response);
     return response;
 }
-
-// const submit = async ({
-//     url = '',
-//     method = '',
-//     headers = '',
-//     mode = '',
-//     body = '',
-// }) => {
-
-//     const response = await fetch('http://localhost:3001/api/usuario/criar', {
-//         method: "POST", // or 'PUT'
-//         headers: { "Content-Type": "application/json" },
-//         // mode: "*",
-//         body: JSON.stringify(dados),
-//     });
-
-//     console.log(response);
-// }

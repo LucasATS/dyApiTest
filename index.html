@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="pt-br">
 
 <head class="animation">
     <!-- Primary Meta Tags -->
@@ -51,6 +52,7 @@
     <script src="js/cookies.js"></script>
     <script src="js/style.js"></script>
     <script src="js/formatadorJSON.js"></script>
+    <script src="js/geradorCodigo.js"></script>
     <script src="js/sistemaLinks.js"></script>
     <script src="js/statusCode.js"></script>
     <script src="js/modals.js"></script>
@@ -184,11 +186,22 @@
                 }
             }
 
+            const handleGerarCodigoExemplo = () => {
+                const codigo = gerarCodigoJSFetch({
+                    url: url, method: method,
+                    headers: JSON.stringify(JSON.parse(headers)),
+                    mode: mode, body: JSON.stringify(JSON.parse(body)),
+                });
+
+                setCodigo(codigo);
+            }
+
             return (
                 <div className="row center" style={{ gap: 15 + 'px' }}>
                     <form className="col center" style={{ gap: 15 + 'px' }}>
+
                         <span className="row" style={{ gap: 10 + 'px' }}>
-                            <select className="" value={method} name="method" onChange={handleInputChange}>
+                            <select value={method} name="method" onChange={handleInputChange} title="Selecione o 'Method' de transmissão da API">
                                 <option>GET</option>
                                 <option>POST</option>
                                 <option>PUT</option>
@@ -196,21 +209,18 @@
                                 {/* <option>OPTIONS</option> */}
                                 {/* <option>HEAD</option> */}
                             </select>
-                            <input className="" placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} />
+                            <input placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} title="Link da API" />
                         </span>
 
-
-                        <input className="" placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} />
-
+                        {/*<input placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} /> */}
 
                         <span className="col" style={{ gap: 10 + 'px' }}>
-                            {/* <input type="text" className="" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
-                            <textarea className="" placeholder="headers" value={headers} name="headers" onChange={handleInputChange}
+                            {/* <input type="text" placeholder="headers" style={{ width: 450 + 'px' }} value={headers} name="headers" readonly /> */}
+                            <textarea placeholder="headers" value={headers} name="headers" onChange={handleInputChange}
                                 onBlur={() => { setHeaders(JSON.stringify(formatarJson(headers), null, 2)) }} />
-                            <textarea className="" placeholder="body" value={body} name="body" onChange={handleInputChange}
+                            <textarea placeholder="body" value={body} name="body" onChange={handleInputChange}
                                 onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
                         </span>
-
 
                         <span className="row" style={{ justifyContent: 'space-between', gap: 10 + 'px' }}>
                             <button type="button" onClick={handleCompartilhar} className={"animation botao"}>Compartilhar</button>
@@ -218,16 +228,12 @@
                         </span>
                     </form>
 
-
                     <span className="col" style={{ gap: 10 + 'px' }}>
                         {statusCode !== 0 &&
                             <p className={`status_${statusCodeParaTexto(statusCode)?.ok}`}>{statusCode} {statusCodeParaTexto(statusCode)?.msg}</p>
                         }
-                        {/* <textarea className="" value={codigo} readonly /> */}
-                        <textarea className="" placeholder="Console:" value={consoleLog} readonly
-                            onBlur={() => { setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2) || consoleLog) }} />
+                        <textarea placeholder="Exemplo em Javascript (fecth):" value={codigo} onClick={handleGerarCodigoExemplo} />
                     </span>
-
 
                 </div>
             );

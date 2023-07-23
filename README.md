@@ -25,10 +25,11 @@
 - [X] Melhorar sistema de link, otimizar os links para poderem ter mais informações
 - [X] Thema dracula - dark, salvar preferencia do thema nos cookies
 - [X] Adicionar CEO
-- [ ] Permitir enviar arquivos
 - [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
 - [ ] Titulo da API (ex: API para login)
 - [ ] Adicionar "Loading..." ao abrir o site
+- [ ] Permitir enviar arquivos
+- [ ] Opção de permitir ou não a formatação automatica de json, melhorar estrutura de formatação
 
 - [ ] Menu lateral para selecionar APIs
 - [ ] Adicionar multiplos APIs para uso (arrey no link)
