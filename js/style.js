@@ -8,7 +8,7 @@ const setTema = (tema = temasTags[0]) => {
     try {
         document.getElementById('styleTema').href = `css/${tema?.option}.css`;
         document.getElementById('styleHighlight').href = tema?.temaCod;
-    } catch (err) { }
+    } catch (err) { console.error(err); }
 }
 
 

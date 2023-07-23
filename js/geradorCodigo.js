@@ -88,7 +88,6 @@ const gerarCodigoPythonRequests = (data) => {
 
     let newHeaders = '';
     for (const key in JSON.parse(headers)) {
-        console.log(key);
         newHeaders += `'${key}': '${JSON.parse(headers)[key]}',`;
     }
 
