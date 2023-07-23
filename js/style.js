@@ -36,6 +36,7 @@ const temaLight = {
     '--font-status': '#000000',
 }
 
+
 const temaDracula = {
     '--bg-color': '#282a36',
     '--font-color1': '#f8f8f2',
@@ -74,6 +75,7 @@ const temaDracula = {
     '--font-status': '#000000',
 }
 
+
 const setTema = (tema = temaLight) => {
     for (const chave in tema) {
         if (tema.hasOwnProperty(chave)) {
@@ -82,6 +84,7 @@ const setTema = (tema = temaLight) => {
         }
     }
 }
+
 
 const temasTags = [
     { option: 'Light', tema: temaLight },
@@ -129,5 +132,3 @@ if (temaCookies !== undefined || temaCookies !== null) {
 } else {
     setTema();
 }
-
-console.log(temaCookies);

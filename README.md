@@ -24,8 +24,7 @@
 - [X] Melhorar arquitetura para ficar mais legivel
 - [X] Melhorar sistema de link, otimizar os links para poderem ter mais informações
 - [X] Thema dracula - dark, salvar preferencia do thema nos cookies
-- [ ] Adicionar CEO
-- [ ] Reconstruir lógica para o header
+- [X] Adicionar CEO
 - [ ] Permitir enviar arquivos
 - [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
 - [ ] Titulo da API (ex: API para login)
@@ -34,7 +33,7 @@
 - [ ] Menu lateral para selecionar APIs
 - [ ] Adicionar multiplos APIs para uso (arrey no link)
 - [ ] Modal com editor JSON
-
+- [ ] Melhorar versão moblie
 <!--
 ## __❤ AGRADECIMENTOS__
 [@<NOME>](<LINK>) "<MENSAGEM>"
