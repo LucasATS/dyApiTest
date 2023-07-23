@@ -1,20 +1,25 @@
-// const submit = async ({
-//     url = '',
-//     method = '',
-//     headers = '',
-//     mode = '',
-//     body = '',
-// }) => {
+const codigoExemploTags = {
+    jsFetch: "Javascript fetch",
+    jsAxios: "Javascript axios",
+    pyRequest: "Python Requests",
+}
 
-//     const response = await fetch('http://localhost:3001/api/usuario/criar', {
-//         method: "POST", // or 'PUT'
-//         headers: { "Content-Type": "application/json" },
-//         mode: "cors",
-//         body: JSON.stringify(dados),
-//     });
+const gerarCodigoExemplo = (nome, data) => {
+    switch (codigoExemploTags[nome]) {
+        case codigoExemploTags.jsFetch:
+            return { codigo: gerarCodigoJSFetch(data), linguagem: 'javascript' };
+            
+            case codigoExemploTags.jsAxios:
+                return { codigo: gerarCodigoJSAxios(data), linguagem: 'javascript' };
+                
+                case codigoExemploTags.pyRequest:
+            return { codigo: gerarCodigoPythonRequests(data), linguagem: 'python' };
 
-//     console.log(response);
-// }
+        default:
+            return '';
+    }
+}
+
 
 const gerarCodigoJSFetch = (data) => {
     const { url, method = 'GET', headers = {}, mode = '', body } = data;
@@ -110,20 +115,3 @@ if response.status_code == 200:
 else:
     print('Error:', response.text)`;
 };
-
-// import requests
-
-// url = 'https://httpbin.org/post'
-// method = 'POST'
-// headers = { 'Content-Type': 'application/json', 'auth': 'your_auth_token_here' }  # Substitua 'your_auth_token_here' pelo token de autenticação, se necessário.
-
-// data = {"msg": "oi"}  # Os dados a serem enviados no corpo da solicitação.
-
-// response = requests.request(url=url, method=method, headers=headers, json=data)
-
-// if response.status_code == 200:
-//     print(response.json())
-// else:
-//     print('Error:', response.text)
-
-

@@ -60,7 +60,7 @@ input[type=text] {
     text-transform: none !important;
 }
 
-textarea {
+textarea{
     width: 446px !important;
     min-height: 150px !important;
     max-height: 350px !important;
@@ -69,7 +69,8 @@ textarea {
 
 select,
 input[type=text],
-textarea {
+textarea,
+.codeView {
     border: 2px var(--border-input) solid;
     background-color: var(--bg-input);
     color: var(--font-color1);
@@ -78,7 +79,8 @@ textarea {
 .botao,
 select,
 input[type=text],
-textarea {
+textarea,
+.codeView {
     width: 220px;
     height: 30px;
 
@@ -120,7 +122,8 @@ textarea {
 .botao:hover,
 select:hover,
 input[type=text]:hover,
-textarea:hover {
+textarea:hover,
+.codeView:hover {
     border: 2px #343434 solid;
     cursor: pointer;
 }
@@ -221,6 +224,7 @@ textarea:hover {
 
 ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -240,7 +244,8 @@ textarea:hover {
     .botao,
     select,
     input[type=text],
-    textarea {
+    textarea,
+    .codeView {
         width: 100% !important;
     }
 }

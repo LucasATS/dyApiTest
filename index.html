@@ -63,9 +63,15 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- OUTROS -->
+    <!-- ALERTA MODAL -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script> <!-- Compressor -->
+
+    <!-- COMPRESSOR -->
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+
+    <!-- CODE -->
+    <script src="js/prism.js"></script>
+    <link href="css/prism-dark.css" rel="stylesheet">
 
 </head>
 
@@ -97,9 +103,12 @@
             const [body, setBody] = useState(null);
 
             const [consoleLog, setConsoleLog] = useState(null);
+
             const [codigo, setCodigo] = useState(null);
+            const [selectCodigo, setSelectCodigo] = useState(null);
 
             const [statusCode, setStatusCode] = useState(0);
+
 
             useEffect(() => {
                 let dadosDoLink = lerLink();
@@ -187,13 +196,19 @@
             }
 
             const handleGerarCodigoExemplo = () => {
-                const codigo = gerarCodigoJSFetch({
+                const codigo = gerarCodigoExemplo(selectCodigo, {
                     url: url, method: method,
                     headers: JSON.stringify(JSON.parse(headers)),
                     mode: mode, body: JSON.stringify(JSON.parse(body)),
                 });
 
-                setCodigo(codigo);
+                let html = Prism.highlight(codigo?.codigo, Prism.languages[codigo?.linguagem], codigo?.linguagem);
+                setCodigo(html);
+            }
+
+            const handlePainelCodigoExemplo = () => {
+                if (selectCodigo !== null && selectCodigo !== 'Abir exemplo em código') handleGerarCodigoExemplo();
+                console.log(selectCodigo);
             }
 
             return (
@@ -228,12 +243,40 @@
                         </span>
                     </form>
 
-                    <span className="col" style={{ gap: 10 + 'px' }}>
+                    <section className="col" style={{ gap: 10 + 'px' }}>
                         {statusCode !== 0 &&
                             <p className={`status_${statusCodeParaTexto(statusCode)?.ok}`}>{statusCode} {statusCodeParaTexto(statusCode)?.msg}</p>
                         }
-                        <textarea placeholder="Exemplo em Javascript (fecth):" value={codigo} onClick={handleGerarCodigoExemplo} />
-                    </span>
+                        <textarea placeholder="Console:" value={consoleLog} readonly
+                            onBlur={() => { setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2) || consoleLog) }} />
+
+                        <span>
+                            <select style={{ width: 454 + 'px', textTransform: 'Capitalize' }} onChange={(e) => setSelectCodigo(e.target.value)}
+                                onClick={handlePainelCodigoExemplo}>
+                                <option value={null}>Abir exemplo em código</option>
+                                {
+                                    Object.keys(codigoExemploTags).map((key) => (<option key={key} value={key}>{codigoExemploTags[key]}</option>))
+                                }
+                            </select>
+
+                            <span style={{ display: (selectCodigo !== null && selectCodigo !== 'Abir exemplo em código') ? 'flex' : 'none' }}
+                                onMouseEnter={handlePainelCodigoExemplo}>
+                                <pre className="language- codeView"
+                                    style={{
+                                        height: 'auto',
+                                        minWidth: 418 + 'px',
+                                        maxWidth: 418 + 'px',
+                                        textTransform: 'none',
+                                        resize: 'both',
+                                    }}
+                                    dangerouslySetInnerHTML={{ __html: codigo }} />
+                            </span>
+
+                            {/*<textarea placeholder="Exemplo em Javascript (fecth):" value={codigo} style={{ display: selectCodigo !== null ? 'flex' : 'none' }}
+                                onMouseEnter={handlePainelCodigoExemplo} /> */}
+                        </span>
+
+                    </section>
 
                 </div>
             );

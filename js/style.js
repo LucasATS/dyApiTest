@@ -60,7 +60,7 @@ const temaDracula = {
 
 
     /* STATUS CODE */
-    '--bg-status-log': '#5bc0de',
+    '--bg-status-log': '#f2ffff',
     '--border-status-log': '#ccd7d7',
 
     '--bg-status-ok': '#62c462',
@@ -97,6 +97,8 @@ const optionsSelectTema = () => {
         novoOption.textContent = temasTags[i]?.option;
         document.getElementById('select-tema').appendChild(novoOption);
     }
+    console.log(getCookie('tema'));
+    document.getElementById('select-tema').value = getCookie('tema');
 }
 
 
@@ -108,7 +110,8 @@ const handleSelectionTemaChange = () => {
         setTema(tema);
         option = myOption;
     });
-
+    
+    console.log(option);
     setCookie('tema', option);
 }
 
