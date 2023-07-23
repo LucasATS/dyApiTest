@@ -5,10 +5,10 @@ const temasTags = [
 
 
 const setTema = (tema = temasTags[0]) => {
-    document.getElementById('styleTema').href = `css/${tema?.option}.css`;
     try {
+        document.getElementById('styleTema').href = `css/${tema?.option}.css`;
         document.getElementById('styleHighlight').href = tema?.temaCod;
-    } catch (err) {}
+    } catch (err) { }
 }
 
 
@@ -49,7 +49,7 @@ const temaCookies = getCookie('tema');
 if (temaCookies !== undefined && temaCookies !== null) {
 
     foreachTemas(temaCookies, (tema) => {
-        setTema(tema?.option);
+        setTema(tema);
     });
 
 } else setTema();
