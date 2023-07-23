@@ -1,0 +1,37 @@
+:root {
+    --bg-color: #f5f9fa;
+    --font-color1: #101010;
+    --placeholder: #777777;
+    --boder-hover: #343434;
+
+    --bg-color-logo: #e2ebed;
+    --font-color-logo: #000000;
+
+
+    --bg-input: #fbfbfb;
+    --border-input: #e2ebed;
+
+
+    --bg-button-color1: #afeaff;
+    --bg-button-color1-click: #79dbff;
+
+
+    --bg-scroll-track: #f1f1f1;
+    --bg-scroll-thumb: #afeaff;
+
+
+    /* STATUS CODE */
+    --bg-status-log: #f2ffff;
+    --border-status-log: #ccd7d7;
+
+    --bg-status-ok: #90ee90cc;
+    --border-status-ok: #008000cc;
+
+    --bg-status-warning: #ffff98cc;
+    --border-status-warning: #b8870bcc;
+
+    --bg-status-error: #f08080cc;
+    --border-status-error: #8b0000cc;
+
+    --font-status: #000000;
+}

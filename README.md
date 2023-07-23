@@ -25,15 +25,17 @@
 - [X] Melhorar sistema de link, otimizar os links para poderem ter mais informações
 - [X] Thema dracula - dark, salvar preferencia do thema nos cookies
 - [X] Adicionar CEO
-- [ ] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
-- [ ] Titulo da API (ex: API para login)
-- [ ] Adicionar "Loading..." ao abrir o site
+- [X] Construir exemplo de código (javascript(fetch), javascript(axios), python...)
+- [X] Melhorar style
+- [X] Add tag titles
 - [ ] Permitir enviar arquivos
+- [ ] Titulo da API (ex: API para login)
 - [ ] Opção de permitir ou não a formatação automatica de json, melhorar estrutura de formatação
+- [ ] Modal com editor JSON
 
+- [ ] Salvar no google drive, poder compartilhar com outras pessoas, poder criar mais de uma API no mesmo link
 - [ ] Menu lateral para selecionar APIs
 - [ ] Adicionar multiplos APIs para uso (arrey no link)
-- [ ] Modal com editor JSON
 - [ ] Melhorar versão moblie
 <!--
 ## __❤ AGRADECIMENTOS__

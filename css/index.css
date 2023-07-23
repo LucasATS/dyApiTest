@@ -1,40 +1,3 @@
-:root {
-    --bg-color: #f5f9fa;
-    --font-color1: #101010;
-    --placeholder: #777777;
-
-    --bg-color-logo: #e2ebed;
-    --font-color-logo: #000000;
-
-
-    --bg-input: #fbfbfb;
-    --border-input: #e2ebed;
-
-
-    --bg-button-color1: #afeaff;
-    --bg-button-color1-click: #79dbff;
-
-
-    --bg-scroll-track: #f1f1f1;
-    --bg-scroll-thumb: #afeaff;
-
-
-    /* STATUS CODE */
-    --bg-status-log: #f2ffff;
-    --border-status-log: #ccd7d7;
-
-    --bg-status-ok: #90ee90cc;
-    --border-status-ok: #008000cc;
-
-    --bg-status-warning: #ffff98cc;
-    --border-status-warning: #b8870bcc;
-
-    --bg-status-error: #f08080cc;
-    --border-status-error: #8b0000cc;
-
-    --font-status: #000000;
-}
-
 html,
 body {
     -webkit-text-size-adjust: 100%;
@@ -60,7 +23,7 @@ input[type=text] {
     text-transform: none !important;
 }
 
-textarea{
+textarea {
     width: 446px !important;
     min-height: 150px !important;
     max-height: 350px !important;
@@ -85,7 +48,7 @@ textarea,
     height: 30px;
 
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize;
 
     outline: none;
     border-radius: 6px;
@@ -124,7 +87,7 @@ select:hover,
 input[type=text]:hover,
 textarea:hover,
 .codeView:hover {
-    border: 2px #343434 solid;
+    border: 2px var(--boder-hover) solid;
     cursor: pointer;
 }
 
@@ -207,14 +170,38 @@ textarea:hover,
     transition: all 0.4s ease;
 }
 
-.version {
+.footer {
     color: var(--font-color1);
     position: fixed;
-    transform: translate(-50%, 50%);
-    bottom: 5px;
-    opacity: 80%;
-    left: 5%;
-    cursor: pointer;
+    /* transform: translate(50%, 50%); */
+    bottom: 0px;
+    left: 15px;
+    /* cursor: pointer; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.codeView {
+    display: none;
+    margin: 0;
+    height: auto !important;
+    min-width: 418px !important;
+    max-width: 418px !important;
+    text-transform: initial !important;
+    text-align: initial !important;
+    padding: 16px;
+}
+
+.codeView code {
+    cursor: auto !important;
+    width: 418px !important;
+    min-height: 150px;
+    overflow: auto;
+    height: min-content;
+    resize: vertical;
+    outline: none;
 }
 
 ::placeholder {

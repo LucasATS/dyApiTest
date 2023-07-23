@@ -1,4 +1,6 @@
+const tagAbrirExemploCodigo = 'Abir exemplo de código';
 const codigoExemploTags = {
+    null: tagAbrirExemploCodigo,
     jsFetch: "Javascript fetch",
     jsAxios: "Javascript axios",
     pyRequest: "Python Requests",
@@ -30,7 +32,7 @@ const gerarCodigoJSFetch = (data) => {
     if (mode !== '' && mode !== undefined && mode !== null) newMode = `mode: "${mode}",\n\t`;
 
     let newBody = '';
-    if (method !== 'GET' && method !== 'HEAD') newBody = `body: ${body},\n\t`;
+    if (method !== 'GET' && method !== 'HEAD' && body !== "null") newBody = `body: ${body},\n\t`;
 
 
     return `fetch('${url}', {
@@ -57,7 +59,7 @@ const gerarCodigoJSAxios = (data) => {
     if (mode !== '' && mode !== undefined && mode !== null) newMode = `mode: "${mode}",\n\t`;
 
     let newBody = '';
-    if (method !== 'GET' && method !== 'HEAD') newBody = `data: ${body},\n\t`;
+    if (method !== 'GET' && method !== 'HEAD' && body !== "null") newBody = `data: ${body},\n\t`;
 
 
     return `const axios = require('axios');
@@ -91,7 +93,7 @@ const gerarCodigoPythonRequests = (data) => {
     }
 
     let newBody = '', newJsonData = '';
-    if (method !== 'GET' && method !== 'HEAD') {
+    if (method !== 'GET' && method !== 'HEAD' && body !== "null") {
         newBody = `data = ${body}\n`;
         newJsonData = `, json=data`;
     }
