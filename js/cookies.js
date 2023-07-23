@@ -1,12 +1,26 @@
-const getCookie = (chave) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${chave}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+const setCookie = (chave, valor, exdays = 100) => {
+    const dataExpiracao = new Date();
+    dataExpiracao.setTime(dataExpiracao.getTime() + (exdays * 24 * 60 * 60 * 1000));
+
+    const cookie = `${chave}=${valor}; expires=${dataExpiracao.toUTCString()}; path=/`;
+    document.cookie = cookie;
+
+    console.log('Cookie salvo:', cookie);
 }
 
-const setCookie = (chave, valor, exdays = 100) => {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = chave + "=" + valor + ";" + expires + ";path=/";
+
+const getCookie = (chave) => {
+    const cookies = document.cookie.split(';');
+
+    for (const cookie of cookies) {
+        const [nome, valor] = cookie.trim().split('=');
+
+        if (nome === chave) {
+            console.log('Valor do cookie:', valor);
+            return valor;
+        }
+    }
+
+    console.log('Cookie não encontrado.');
+    return null;
 }

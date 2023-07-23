@@ -81,8 +81,6 @@ const setTema = (tema = temaLight) => {
             document.documentElement.style.setProperty(chave, valor);
         }
     }
-
-    setCookie('tema', tema);
 }
 
 const temasTags = [
@@ -102,20 +100,34 @@ const optionsSelectTema = () => {
 const handleSelectionTemaChange = () => {
     const valor = document.getElementById('select-tema').value;
 
+    let option = null;
+    foreachTemas(valor, (tema, myOption) => {
+        setTema(tema);
+        option = myOption;
+    });
+
+    setCookie('tema', option);
+}
+
+
+const foreachTemas = (valor, func = (tema, option) => { }) => {
     for (const i in temasTags) {
-        if (temasTags[i]?.option === valor) {
-            setTema(temasTags[i]?.tema);
-        }
+        if (temasTags[i]?.option === valor)
+            func(temasTags[i]?.tema, temasTags[i]?.option);
     }
 }
 
 
-const temaController = () => {
-    const temaCookies = getCookie('tema');
-    if (temaCookies !== undefined) setTema(temaCookies)
-    setTema();
+//CONTROLLER
+const temaCookies = getCookie('tema');
+if (temaCookies !== undefined || temaCookies !== null) {
 
-    console.log(temaCookies);
+    foreachTemas(valor, (tema, _) => {
+        setTema(tema);
+    });
+
+} else {
+    setTema();
 }
 
-temaController();
+console.log(temaCookies);
