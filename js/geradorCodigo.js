@@ -92,7 +92,7 @@ const gerarCodigoPythonRequests = (data) => {
 
     let newBody = '', newJsonData = '';
     if (method !== 'GET' && method !== 'HEAD') {
-        newBody = `data = ${body}`;
+        newBody = `data = ${body}\n`;
         newJsonData = `, json=data`;
     }
 
@@ -107,8 +107,7 @@ url = '${url}'
 method = '${method}'
 headers = { ${newHeaders} }
   
-${newBody}
-response = requests.request(url=url, method=method, headers=headers${newMode}${newJsonData})
+${newBody}response = requests.request(url=url, method=method, headers=headers${newMode}${newJsonData})
   
 if response.status_code == 200:
     print(response.json())
