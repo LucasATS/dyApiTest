@@ -122,7 +122,7 @@ const foreachTemas = (valor, func = (tema, option) => { }) => {
 const temaCookies = getCookie('tema');
 if (temaCookies !== undefined || temaCookies !== null) {
 
-    foreachTemas(valor, (tema, _) => {
+    foreachTemas(temaCookies, (tema, _) => {
         setTema(tema);
     });
 
