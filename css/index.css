@@ -17,6 +17,7 @@ body {
     padding: 0;
 }
 
+input[type=file],
 input[type=text] {
     padding: 0;
     height: 26px !important;
@@ -32,6 +33,7 @@ textarea {
 
 select,
 input[type=text],
+input[type=file],
 textarea,
 .codeView {
     border: 2px var(--border-input) solid;
@@ -42,6 +44,7 @@ textarea,
 .botao,
 select,
 input[type=text],
+input[type=file],
 textarea,
 .codeView {
     width: 220px;

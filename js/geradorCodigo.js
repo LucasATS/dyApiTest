@@ -10,11 +10,11 @@ const gerarCodigoExemplo = (nome, data) => {
     switch (codigoExemploTags[nome]) {
         case codigoExemploTags.jsFetch:
             return { codigo: gerarCodigoJSFetch(data), linguagem: 'javascript' };
-            
-            case codigoExemploTags.jsAxios:
-                return { codigo: gerarCodigoJSAxios(data), linguagem: 'javascript' };
-                
-                case codigoExemploTags.pyRequest:
+
+        case codigoExemploTags.jsAxios:
+            return { codigo: gerarCodigoJSAxios(data), linguagem: 'javascript' };
+
+        case codigoExemploTags.pyRequest:
             return { codigo: gerarCodigoPythonRequests(data), linguagem: 'python' };
 
         default:
@@ -28,6 +28,9 @@ const gerarCodigoJSFetch = (data) => {
 
     if (url === null) return '';
 
+    let newHeaders = '';
+    if (headers.length > 3) newHeaders = `headers: ${headers},\n\t`;
+
     let newMode = '';
     if (mode !== '' && mode !== undefined && mode !== null) newMode = `mode: "${mode}",\n\t`;
 
@@ -37,16 +40,14 @@ const gerarCodigoJSFetch = (data) => {
 
     return `fetch('${url}', {
     method: '${method}',
-    headers: ${headers},
-    ${newMode}${newBody}
-})
+    ${newHeaders}${newMode}${newBody}})
     .then(resp => resp.json())
     .then(data => {
         console.log(data);
     })
     .catch(error => {
         console.error(error);
-    });`;
+});`;
 };
 
 
@@ -54,6 +55,9 @@ const gerarCodigoJSAxios = (data) => {
     const { url, method = 'GET', headers = {}, mode = '', body } = data;
 
     if (url === null) return '';
+
+    let newHeaders = '';
+    if (headers.length > 3) newHeaders = `headers: ${headers},\n\t`;
 
     let newMode = '';
     if (mode !== '' && mode !== undefined && mode !== null) newMode = `mode: "${mode}",\n\t`;
@@ -67,9 +71,7 @@ const gerarCodigoJSAxios = (data) => {
   const config = {
     url: '${url}',
     method: '${method}',
-    headers: ${headers},
-    ${newMode}${newBody}
-  };
+    ${newHeaders}${newMode}${newBody}};
   
   axios(config)
     .then(response => {
@@ -86,10 +88,16 @@ const gerarCodigoPythonRequests = (data) => {
 
     if (url === null) return '';
 
+
     let newHeaders = '';
-    for (const key in JSON.parse(headers)) {
-        newHeaders += `'${key}': '${JSON.parse(headers)[key]}',`;
+    if (headers.length > 3) {
+        newHeaders += 'headers = {';
+        for (const key in JSON.parse(headers)) {
+            newHeaders += `'${key}': '${JSON.parse(headers)[key]}',`;
+        }
+        newHeaders += '}\n'
     }
+
 
     let newBody = '', newJsonData = '';
     if (method !== 'GET' && method !== 'HEAD' && body !== "null") {
@@ -97,17 +105,18 @@ const gerarCodigoPythonRequests = (data) => {
         newJsonData = `, json=data`;
     }
 
+
     let newMode = '';
     if (mode !== '' && mode !== undefined && mode !== null) {
         newMode = `, allow_redirects=${mode === 'no-cors' ? 'False' : 'True'}`;
     }
 
+
     return `import requests
   
 url = '${url}'
 method = '${method}'
-headers = { ${newHeaders} }
-  
+${newHeaders}
 ${newBody}response = requests.request(url=url, method=method, headers=headers${newMode}${newJsonData})
   
 if response.status_code == 200:

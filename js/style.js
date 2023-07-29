@@ -37,10 +37,7 @@ const handleSelectionTemaChange = () => {
 
 
 const foreachTemas = (valor, func = () => { }) => {
-    for (const i in temasTags) {
-        if (temasTags[i]?.option === valor)
-            func(temasTags[i]);
-    }
+    temasTags.map(a => { if (a?.option === valor) func(a); });
 }
 
 
