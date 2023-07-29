@@ -8,6 +8,7 @@
 
 [![preview](./.github/preview-xl.png)](https://dyapitest.vercel.app/)
 
+[😎 SOBRE ESSE PROJETO](https://dyapitest.vercel.app/sobre.html)
 [🔗 ACESSE O PROJETO ](https://dyapitest.vercel.app/)
 
 ## __📂 PLAY__
@@ -32,6 +33,7 @@
 - [ ] Titulo da API (ex: API para login)
 - [ ] Opção de permitir ou não a formatação automatica de json, melhorar estrutura de formatação
 - [ ] Modal com editor JSON
+- [ ] Modais com o styles definidos
 
 - [ ] Salvar no google drive, poder compartilhar com outras pessoas, poder criar mais de uma API no mesmo link
 - [ ] Menu lateral para selecionar APIs

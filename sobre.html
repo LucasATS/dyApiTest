@@ -42,7 +42,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-BNH8X40C6H');
     </script>
 
@@ -53,10 +52,12 @@
     <link rel="stylesheet" href="css/index.css">
     <script src="js/cookies.js"></script>
     <script src="js/style.js"></script>
-    <script src="js/modals.js"></script>
 
     <!-- ALERTA MODAL -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- MD to html -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@5.1.2/lib/marked.umd.min.js"></script>
 </head>
 
 <body class="col center">
@@ -73,8 +74,35 @@
     </header>
 
 
-    <p>Em breve...</p>
+    <script>
+        async function converterMarkdownParaHTML(markdownTexto) {
+            const elementoHTML = document.createElement("div");
+            elementoHTML.innerHTML = marked.parse(markdownTexto);
+            document.getElementById("conteudoMarkdown").appendChild(elementoHTML);
+        }
 
+        async function carregarArquivoMarkdown() {
+            try {
+                const response = await fetch('https://dyapitest.vercel.app/sobre.md', { method: 'GET' });
+
+                if (response.ok) {
+                    const markdownTexto = await response.text();
+                    await converterMarkdownParaHTML(markdownTexto);
+                } else {
+                    console.error("Erro ao carregar o arquivo Markdown.");
+                }
+            } catch (error) {
+                console.error("Erro ao carregar o arquivo Markdown:", error);
+            }
+        }
+
+        // Chame a função para carregar o arquivo Markdown e converter para HTML quando a página carregar
+        window.onload = function () {
+            carregarArquivoMarkdown();
+        };
+    </script>
+
+    <div id="conteudoMarkdown"></div>
 
     <BotaoVisitaGithub model="modelo3" link="https://github.com/LucasATS/dyApiTest"></BotaoVisitaGithub>
     <script

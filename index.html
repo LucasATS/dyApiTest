@@ -42,7 +42,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-BNH8X40C6H');
     </script>
 
@@ -58,7 +57,7 @@
     <script src="js/style.js"></script>
     <script src="js/statusCode.js"></script>
     <script src="js/modals.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/submit.js"></script>
 
     <!-- REACT UNPKG -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -94,7 +93,8 @@
     </section>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
+
 
         function App(props) {
             const [url, setUrl] = useState(null);
@@ -102,6 +102,7 @@
             const [headers, setHeaders] = useState('{ "Content-Type": "application/json" }');
             const [mode, setMode] = useState(null);
             const [body, setBody] = useState(null);
+            const [arquivo, setArquivo] = useState({ titulo: null, arquivo: null });
 
             const [consoleLog, setConsoleLog] = useState(null);
 
@@ -124,17 +125,25 @@
                         setBody(JSON.stringify(JSON.parse(dadosDoLink?.body), null, 2) || dadosDoLink?.body);
 
                         setStatusCode(dadosDoLink?.statusCode);
-                        setConsoleLog(JSON.stringify(JSON.parse(dadosDoLink?.consoleLog), null, 2) || dadosDoLink?.consoleLog);
+
+                        try {
+                            setConsoleLog(JSON.stringify(JSON.parse(dadosDoLink?.consoleLog, null, 2)));
+                        } catch (error) {
+                            setConsoleLog(dadosDoLink?.consoleLog);
+                        }
 
                         dadosDoLink = null;
                     }
                 } catch (error) {
                     console.log(error);
                 }
+
+                document.onkeydown = handleKeyDown;
+                // onKeyDown={handleKeyDown}
             }, []);
 
             const handleInputChange = (event) => {
-                const { name, value } = event.target;
+                const { name, value, files } = event.target;
 
                 switch (name) {
                     case 'url':
@@ -152,24 +161,29 @@
                     case 'body':
                         setBody(value);
                         break;
+                    case 'arquivoTitulo':
+                        setArquivo({ titulo: value, arquivo: arquivo?.arquivo });
+                        break;
+                    case 'arquivo':
+                        setArquivo({ titulo: arquivo?.titulo, arquivo: files[0] });
+                        break;
                     default:
                         break;
                 }
             };
 
-            const handleSubmit = async (event) => {
+            const handleSubmit = async () => {
                 if (url !== '' && url !== null) {
-                    const dados = {
-                        url: url,
-                        method: method, headers: headers,
-                        mode: mode, body: body,
-                    }
-                    console.log(dados);
+                    const dados = { url, method, headers, mode, body, arquivo }
                     const log = await submit(dados);
 
                     setStatusCode(log?.status);
 
-                    const text = await log?.text()
+                    let text = await log;
+                    try {
+                        text = await log?.text();
+                    } catch (error) { }
+
                     try {
                         setConsoleLog(JSON.stringify(JSON.parse(text), null, 2));
                     } catch (error) {
@@ -179,17 +193,33 @@
                     modalErro(mensagens.erroSemURL)
                 }
             };
+            const submitButtonRef = useRef(null);
+            const handleKeyDown = (event) => {
+                if (event.key === 'Enter' && event.ctrlKey) {
+                    console.log('oi');
+                    event.preventDefault();
+                    submitButtonRef.current.focus();
+                    // submitButtonRef.current.click();
+                }
+            };
+
 
             const handleCompartilhar = async () => {
                 if (url !== '' && url !== null) {
+
+                    let newConsoleLog = consoleLog;
+                    try {
+                        newConsoleLog = JSON.stringify(JSON.parse(consoleLog));
+                    } catch (error) { }
+
                     const dados = {
-                        url: url,
-                        method: method,
+                        url,
+                        method,
                         headers: JSON.stringify(JSON.parse(headers)),
-                        mode: mode,
+                        mode,
                         body: JSON.stringify(JSON.parse(body)),
-                        consoleLog: JSON.stringify(JSON.parse(consoleLog)),
-                        statusCode: statusCode,
+                        consoleLog: newConsoleLog,
+                        statusCode,
                     }
                     gerarLink(dados);
                 } else {
@@ -199,9 +229,11 @@
 
             const handleGerarCodigoExemplo = () => {
                 const codigo = gerarCodigoExemplo(selectCodigo, {
-                    url: url, method: method,
+                    url,
+                    method,
                     headers: JSON.stringify(JSON.parse(headers)),
-                    mode: mode, body: JSON.stringify(JSON.parse(body)),
+                    mode,
+                    body: JSON.stringify(JSON.parse(body)),
                 });
 
                 if (codigo?.linguagem !== undefined) {
@@ -211,16 +243,29 @@
                 }
             }
 
+
             const handlePainelCodigoExemplo = () => {
                 if (selectCodigo !== tagAbrirExemploCodigo && selectCodigo !== 'null') handleGerarCodigoExemplo();
             }
 
+
+            const handleOnBlurConsole = () => {
+                try {
+                    setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2))
+                } catch (error) { }
+            }
+
+
             return (
-                <div className="row center animation" style={{ gap: 15 + 'px' }}>
+                <div className="row center animation"
+                    style={{ gap: 15 + 'px', alignItems: 'flex-start' }}>
                     <form className="col center animation" style={{ gap: 15 + 'px' }}>
 
-                        <span className="row" style={{ gap: 10 + 'px' }}>
-                            <select value={method} name="method" onChange={handleInputChange} title="Selecione o 'Method' de transmissão da API">
+                        <span className="row" style={{ gap: 0 + 'px', width: 454 + 'px' }}>
+                            <select value={method} name="method"
+                                style={{ width: 'auto', flexGrow: 0, borderRadius: '6px 0px 0px 6px' }}
+                                onChange={handleInputChange}
+                                title="Selecione o 'Method' de transmissão da API">
                                 <option>GET</option>
                                 <option>POST</option>
                                 <option>PUT</option>
@@ -228,7 +273,18 @@
                                 {/* <option>OPTIONS</option> */}
                                 {/* <option>HEAD</option> */}
                             </select>
-                            <input placeholder="URL" type="text" name="url" value={url} onChange={handleInputChange} title="Link da API" />
+
+                            <input placeholder="URL"
+                                type="text"
+                                name="url"
+                                value={url}
+                                onChange={handleInputChange}
+                                title="Link da API"
+                                style={{ width: 'auto', flexGrow: 4, borderRadius: '0px' }} />
+
+                            <button type="button" onClick={handleSubmit} ref={submitButtonRef} onFocus={() => console.log('oi')}
+                                className={"animation botao"} style={{ width: 'auto', flexGrow: 0, borderRadius: '0px 6px 6px 0px' }}
+                                title="Enviar API">submit</button>
                         </span>
 
                         {/*<input placeholder="mode" type="text" name="mode" value={mode} style={{ width: 450 + 'px' }} onChange={handleInputChange} /> */}
@@ -239,21 +295,29 @@
 
                             <textarea placeholder="body" value={body} name="body" onChange={handleInputChange} title={`Body:`}
                                 onBlur={() => { setBody(JSON.stringify(formatarJson(body), null, 2)) }} />
+
+                            <span className="row" style={{ gap: 0 + 'px', width: 454 + 'px' }}>
+                                <input placeholder="nome do arquivo" type="text" name="arquivoTitulo"
+                                    style={{ width: 'auto', flexGrow: 0, borderRadius: '6px 0px 0px 6px' }}
+                                    value={arquivo?.titulo} onChange={handleInputChange} title="Nome de entrada do arquivo" />
+                                <input type="file" name="arquivo" onChange={handleInputChange}
+                                    style={{ width: 'auto', flexGrow: 4, borderRadius: '0px 6px 6px 0px' }} />
+                            </span>
+
                         </span>
 
-                        <span className="row" style={{ justifyContent: 'space-between', gap: 10 + 'px' }}>
-                            <button type="button" onClick={handleCompartilhar} className={"animation botao"}
-                                title="Gerar um link com todos os dados para compartilhar">Gerar Link Compartilhável</button>
-                            <button type="button" onClick={handleSubmit} className={"animation botao"} title="Enviar API">submit</button>
+                        <span className="row" style={{ justifyContent: 'space-between', gap: 10 + 'px', width: 454 + 'px', padding: 0 }}>
+                            <button type="button" onClick={handleCompartilhar} className={"animation botao"} style={{ width: 'auto', flexGrow: 1 }}
+                                title="Gerar um link com todos os dados para compartilhar">Compartilhar Link</button>
                         </span>
                     </form>
 
                     <section className="col" style={{ gap: 10 + 'px' }}>
                         {statusCode !== 0 &&
-                            <p className={`status_${statusCodeParaTexto(statusCode)?.ok} `}>{statusCode} {statusCodeParaTexto(statusCode)?.msg}</p>
+                            <p className={`status_${statusCodeParaTexto(statusCode)?.ok} `}>{statusCode || ' -'} {statusCodeParaTexto(statusCode)?.msg}</p>
                         }
                         <textarea placeholder="Console:" value={consoleLog} readonly title={`Resultados do console:`}
-                            onBlur={() => { setConsoleLog(JSON.stringify(JSON.parse(consoleLog), null, 2) || consoleLog) }} />
+                            onBlur={handleOnBlurConsole} />
 
                         <span>
                             <select style={{ width: 454 + 'px', textTransform: 'Capitalize' }} onChange={(e) => setSelectCodigo(e.target.value)}
@@ -262,7 +326,10 @@
                             </select>
 
                             <pre className="codeView" title={`Código exemplo, na linguagem ${linguagemCodigo}\nEsse modelo de código, pode conter falhas`}
-                                style={{ display: selectCodigo !== tagAbrirExemploCodigo && selectCodigo !== 'null' ? 'flex' : 'none' }}
+                                style={{
+                                    display: selectCodigo !== tagAbrirExemploCodigo && selectCodigo !== 'null' ? 'flex' : 'none',
+                                    borderRadius: '0px 0px 6px 6px', marginTop: '-6px'
+                                }}
                                 onMouseEnter={handlePainelCodigoExemplo}>
                                 <code contenteditable="true" className={`language-${linguagemCodigo}`} dangerouslySetInnerHTML={{ __html: codigo }} />
                             </pre>
@@ -284,7 +351,7 @@
         src="https://cdn.jsdelivr.net/gh/LucasATS/BotaoVisitaGithub@5543a67f6227cb9bdb380625b51983b56a10c9ba/BotaoVisitaGithub.js"></script>
 
     <footer class="footer">
-        <p> 20230723-5v</p>
+        <p style="background-color: var(--bg-color); border-radius: 6px; padding: 6px;">29230723-5v</p>
         <p onclick="window.location.href = './sobre.html'"
             style="cursor: pointer; background-color: var(--bg-color-logo); border-radius: 6px; padding: 6px;">sobre</p>
     </footer>

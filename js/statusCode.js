@@ -1,6 +1,7 @@
 const statusCodeParaTexto = statusCode => {
     const statusCodes = {
-        0: { ok: null, msg: '' },
+        '-1': { ok: 'log', msg: 'Erro interno, consulte o painel de desenvolvedor' }, 
+        0: { ok: null, msg: '' }, 
 
         100: { ok: 'log', msg: 'Continuar 🚀' },
         101: { ok: 'log', msg: 'Mudando Protocolos 🚀' },
@@ -71,5 +72,5 @@ const statusCodeParaTexto = statusCode => {
         511: { ok: 'error', msg: 'Autenticação de Rede Requerida 😢' }
     };
 
-    return statusCodes[statusCode] || { ok: 'log' , msg: 'Código de status não reconhecido 🤔' };
+    return statusCodes[statusCode] || { ok: 'log' , msg: `Código de status não reconhecido 🤔` };
 }

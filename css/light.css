@@ -1,23 +1,24 @@
 :root {
-    --bg-color: #f5f9fa;
+    --bg-color: #eef2f4;
     --font-color1: #101010;
     --placeholder: #777777;
     --boder-hover: #343434;
 
-    --bg-color-logo: #e2ebed;
+    --bg-color-logo: #fbfbfb;
     --font-color-logo: #000000;
 
 
-    --bg-input: #fbfbfb;
-    --border-input: #e2ebed;
+    --bg-input: var(--bg-color-logo);
+    --border-input: var(--bg-color-logo);
 
 
-    --bg-button-color1: #afeaff;
+    --bg-button-blink: #00bbff;
+    --bg-button-color1: #82deff;
     --bg-button-color1-click: #79dbff;
 
 
-    --bg-scroll-track: #f1f1f1;
-    --bg-scroll-thumb: #afeaff;
+    --bg-scroll-track: #ffffff;
+    --bg-scroll-thumb: var(--bg-button-color1);
 
 
     /* STATUS CODE */

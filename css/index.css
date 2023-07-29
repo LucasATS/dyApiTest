@@ -24,6 +24,17 @@ input[type=text] {
     text-transform: none !important;
 }
 
+input[type=file]::file-selector-button {
+    height: 26px;
+    border: 4px var(--bg-input) solid !important;
+    text-align: center !important;
+    font-size: 12px;
+    line-height: 1.5;
+    tab-size: 4;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
 textarea {
     width: 446px !important;
     min-height: 150px !important;
@@ -76,6 +87,7 @@ textarea,
     background-color: var(--bg-color-logo);
 }
 
+input[type=file]::file-selector-button,
 .botao {
     border: 2px transparent solid;
     background-color: var(--bg-button-color1);
@@ -85,8 +97,43 @@ textarea,
     background-color: var(--bg-button-color1);
 }
 
+@keyframes blink {
+    0%,
+    100% {
+        -webkit-box-shadow: 0px 0px 34px 0px var(--bg-button-blink);
+        box-shadow: 0px 0px 34px 0px var(--bg-button-blink);
+    }
+    50% {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+@-webkit-keyframes blink {
+    0%,
+    100% {
+        -webkit-box-shadow: 0px 0px 34px 0px var(--bg-button-blink);
+        box-shadow: 0px 0px 34px 0px var(--bg-button-blink);
+    }
+    50% {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.botao:focus {
+    outline: 2px var(--boder-hover) solid;
+    outline-offset: 2px;
+    border: 0px var(--boder-hover) solid !important;
+    -webkit-box-shadow: 0px 0px 34px 0px rgba(144, 238, 144, 0.5);
+    box-shadow: 0px 0px 34px 0px rgba(144, 238, 144, 0.5);
+    animation: blink 2s ease-in-out infinite;
+    -webkit-animation: blink 2s ease-in-out infinite;
+}
+
+
 .botao:hover,
 select:hover,
+input[type=file]:hover,
 input[type=text]:hover,
 textarea:hover,
 .codeView:hover {
@@ -187,19 +234,20 @@ textarea:hover,
 }
 
 .codeView {
-    display: none;
     margin: 0;
+    display: none;
     height: auto !important;
-    min-width: 418px !important;
-    max-width: 418px !important;
+    min-width: 450px !important;
+    max-width: 450px !important;
     text-transform: initial !important;
     text-align: initial !important;
-    padding: 16px;
 }
 
 .codeView code {
+    margin: 0;
+    padding: 16px;
     cursor: auto !important;
-    width: 418px !important;
+    width: 440px !important;
     min-height: 150px;
     overflow: auto;
     height: min-content;
@@ -213,9 +261,10 @@ textarea:hover,
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
 }
+
 
 ::-webkit-scrollbar-track {
     background: var(--bg-scroll-track);
@@ -223,7 +272,7 @@ textarea:hover,
 
 ::-webkit-scrollbar-thumb {
     background: var(--bg-scroll-thumb);
-    border-radius: 3px;
+    border-radius: 6px;
 }
 
 @media (orientation: portrait) {
