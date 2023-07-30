@@ -76,9 +76,8 @@
 
     <script>
         async function converterMarkdownParaHTML(markdownTexto) {
-            const elementoHTML = document.createElement("div");
+            const elementoHTML = document.getElementById("conteudoMarkdown");
             elementoHTML.innerHTML = marked.parse(markdownTexto);
-            document.getElementById("conteudoMarkdown").appendChild(elementoHTML);
         }
 
         async function carregarArquivoMarkdown() {
