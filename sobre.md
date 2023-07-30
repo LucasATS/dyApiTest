@@ -15,11 +15,11 @@ O **dyAPI Test** é uma ferramenta desenvolvida para auxiliar usuários no teste
 
 2. **Enviar a Requisição:** 📤
    Após preencher os campos, clique no botão "submit" para enviar a requisição para a API. Os resultados da requisição serão exibidos no painel de console logo ao lado.
-   1. **Dica:** use o comando **cntrl + enter** para pular direto para esse botão.
+   **Dica:** use o comando ``cntrl`` ``enter`` para pular direto para esse botão.
 
 3. **Resultados do Console:** 🧾
    O painel de console exibirá as respostas da API, incluindo os códigos de status, informações de erro e outros detalhes relevantes.
-   1. **Dica:** fique a vontade para usar o devTools do navegador para _debugar_ melhor os resultados da API, normalmente o comando é **f12**.
+   **Dica:** fique a vontade para usar o devTools do navegador para _debugar_ melhor os resultados da API, normalmente o comando é ``F12``.
 
 4. **Compartilhamento de Links:** 🔗
    Você pode gerar um link com todos os dados inseridos, incluindo o código da requisição e as respostas obtidas. Isso permite que você compartilhe facilmente os testes com outras pessoas ou acesse-os posteriormente. ⚠️ Não usamos banco de dados, nada é amarzenado, os dados gerados são convertidos em arquivos e compactados em um link, portando, dados grandes podem falhar o compartilhamento.
@@ -31,14 +31,14 @@ O **dyAPI Test** é uma ferramenta desenvolvida para auxiliar usuários no teste
 
 O **dyAPI Test** é uma ferramenta poderosa para testar e documentar APIs, tornando o processo mais eficiente e produtivo. Seja você um desenvolvedor, testador ou entusiasta de APIs, essa ferramenta será uma adição valiosa ao seu conjunto de recursos. Experimente agora mesmo e aprimore sua experiência no trabalho com APIs!
 
-## __🛠 TECNOLOGIAS__ 
+## 🛠 TECNOLOGIAS 
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-## __😘 CONTATO__ <ALTERE APENAS OS LINKS DOS HREF>
+## 😘 CONTATO <ALTERE APENAS OS LINKS DOS HREF>
 <p align="left">
   <a href="https://github.com/LucasATS/"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Github"></a>
   <a href="https://www.instagram.com/lukaolmd/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&amp;logo=instagram&amp;logoColor=white" alt="instagram"></a>
